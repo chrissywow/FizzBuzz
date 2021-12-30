@@ -22,6 +22,7 @@ function getValues(){
     //we call fizzBuzz
 
     //call displayData and write the values to the screen
+
 }
 
 function fizzBuzz(fizzValue, buzzValue)
