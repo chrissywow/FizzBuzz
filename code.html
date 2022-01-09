@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Crystal Dekalb</title>
+    <title>Fizz Buzz: A Coding Project by Crystal Dekalb</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,7 +25,7 @@
  <nav class="navbar navbar-expand-md  navbar-dark fixed-top">
     <div class="container-fluid"> 
         <a class="navbar-brand" href="#"><img src="img/logov1.svg" class="d-inline-block align-text-top"
-             width="30" height="24"> APP NAME</a>
+             width="30" height="24">FIZZ BUZZ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@
                     <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="https://github.com/chrissywow/JsSiteTemplate.git">Git Repo</a>
+                    <a class="nav-link" target="_blank" href="https://github.com/chrissywow/FizzBuzz">Git Repo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="https://crystal-portfolio.netlify.app">About</a>
@@ -58,18 +58,100 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call Hello World
-                        function helloWorld(){
-                            alert("hello World");
-                        }
+                        //get values from the user. We need to get the fizz and the buzz value.
+function getValues(){
+
+    //get the user values form the page
+    let fizzValue = document.getElementById("fizzValue").value;
+    let buzzValue = document.getElementById("buzzValue").value;
+
+    //We need to validate our input
+    //parse into Integers
+    fizzValue = parseInt(fizzValue);
+    buzzValue = parseInt(buzzValue);
+
+    if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)){
+        //call fizzBuzz
+        let fbArray = fizzBuzz(fizzValue,buzzValue);
+        //we call displayNumbers
+        displayData(fbArray);
+    } else {
+        alert("You must enter intergers");
+    }
+}
+
+// Do fizz Buzz
+function fizzBuzz(fizzValue, buzzValue)
+{
+    let returnArray =[];
+   //loop from 1 to 100
+    for (let i = 1; i <=100; i++){
+    //check to see if divisible by Both ( 3 and 5)
+    //check to see if diviisble by fizz value ( 3)
+    //check to see if divisible by buzz value (5)
+        if(i % fizzValue == 0 && i% buzzValue == 0){
+            returnArray.push('FizzBuzz');
+        }else if (i % fizzValue == 0){
+            returnArray.push('Fizz');
+
+        }else if (i % buzzValue == 0){
+            returnArray.push('Buzz');
+        }else{
+            returnArray.push(i);
+        }
+    }
+    return returnArray;
+}
+
+function displayData(fbArray){
+//loop over the array and create a tablerow for each item.
+
+
+//get table body element from the page
+let tableBody = document.getElementById("results");
+
+//get the template row
+let templateRow = document.getElementById("fbTemplate");
+
+//clear the table first
+tableBody.innerHTML = "";
+
+for (let index = 0; index < fbArray.length; index += 5) {
+    let tableRow = document.importNode(templateRow.content, true);
+    
+    //grab use the to put into array
+    let rowCols = tableRow.querySelectorAll("td");
+    rowCols[0].classList.add(fbArray[index]);
+    rowCols[0].textContent = fbArray[index];
+
+    rowCols[1].classList.add(fbArray[index +1]);
+    rowCols[1].textContent = fbArray[index+1];
+
+    rowCols[2].classList.add(fbArray[index +2]);
+    rowCols[2].textContent = fbArray[index+2];
+
+    rowCols[3].classList.add(fbArray[index +3]);
+    rowCols[3].textContent = fbArray[index+3];
+
+    rowCols[4].classList.add(fbArray[index +4]);
+    rowCols[4].textContent = fbArray[index+4];
+
+    tableBody.appendChild(tableRow);
+
+}
+        
+
+//add all the rows to the table.
+}
                     </code>
                 </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
-
+                    <p>The Code is structured in three functions
+                    <h5>getValues</h5>
+                    <p>getValues is a function that gets values from the user input, validates the input(makes sure they are integers) and calls and displays the fizzbuzz numbers.</p> 
+                    <h5>fizzBuzz</h5> The function fizzBuzz is designed to do a loop return array to see if the inputs are divisible by both 3 and 5 or if they are just divisible by 3 or 5 or neither. <br>
+                    <h5>DisplayData</h5> The DisplayData function loops over the array and creates a tablerow for each time so that the user can see which number is divisble by 3 or 5.
                 </div>
             </div>
         </div>
